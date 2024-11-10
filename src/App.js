@@ -13,7 +13,7 @@ import Success from "./Success"; // Import the Success component
 
 const App = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [authToken, setAuthToken] = useState(null);
+  const [setAuthToken] = useState(null);
 
   const handleLogin = (token) => {
     setAuthToken(token);
