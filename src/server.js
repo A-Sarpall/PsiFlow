@@ -1,14 +1,23 @@
-// server.js
 require("dotenv").config();
+console.log("Stripe API Key:", process.env.STRIPE_API_KEY); // Make sure this logs the correct key
+
 const express = require("express");
 const Stripe = require("stripe");
 const cors = require("cors");
 
 const app = express();
-const stripe = Stripe(process.env.STRIPE_SECRET_KEY);
+
+// Use the correct method to initialize Stripe
+const stripe = Stripe(process.env.STRIPE_API_KEY); // Ensure you are using the right environment variable
+
+console.log("Stripe initialized with API Key:", process.env.STRIPE_API_KEY); // For debugging purposes
 
 app.use(express.json());
-app.use(cors());
+app.use(
+  cors({
+    origin: "http://localhost:3000", // Assuming your frontend runs here
+  })
+);
 
 // Define a route for the root URL
 app.get("/", (req, res) => {
@@ -31,7 +40,7 @@ app.post("/create-checkout-session", async (req, res) => {
               product_data: {
                 name: "Event Ticket",
               },
-              unit_amount: price * 100,
+              unit_amount: price * 100, // Convert to cents
             },
             quantity: 1,
           },
@@ -54,7 +63,7 @@ app.post("/create-checkout-session", async (req, res) => {
               recurring: {
                 interval: "month",
               },
-              unit_amount: price * 100,
+              unit_amount: price * 100, // Convert to cents
             },
             quantity: 1,
           },
@@ -67,6 +76,7 @@ app.post("/create-checkout-session", async (req, res) => {
 
     res.json({ url: session.url });
   } catch (error) {
+    console.error("Error creating checkout session:", error); // Log the error for debugging
     res.status(500).json({ error: error.message });
   }
 });
