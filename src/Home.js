@@ -11,11 +11,14 @@ const Home = ({ onLogout }) => {
     e.preventDefault();
     try {
       const apiUrl = process.env.REACT_APP_API_URL;
-      const response = await axios.post(`${apiUrl}/create-checkout-session`, {
-        eventType,
-        price: parseInt(price),
-        installments: parseInt(installments),
-      });
+      const response = await axios.post(
+        `/.netlify/functions/create-checkout-session`,
+        {
+          eventType,
+          price: parseInt(price),
+          installments: parseInt(installments),
+        }
+      );
       window.location.href = response.data.url;
     } catch (error) {
       console.error("Error creating checkout session:", error);
