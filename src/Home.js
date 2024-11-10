@@ -10,7 +10,6 @@ const Home = ({ onLogout }) => {
   const handleCreateEvent = async (e) => {
     e.preventDefault();
     try {
-      const apiUrl = process.env.REACT_APP_API_URL;
       const response = await axios.post(
         `/.netlify/functions/create-checkout-session`,
         {
