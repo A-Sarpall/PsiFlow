@@ -1,5 +1,10 @@
 Our final project code is in the Final branch, not main
 
+```
+We used the following open source tools.
+React.js, Node.js, Flask, Stripe. Credit to all developers for these tools is given.
+```
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
@@ -70,8 +75,3 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
-
-```
-We used the following open source tools.
-React.js, Node.js, Flask, Stripe. Credit to all developers for these tools is given.
-```
