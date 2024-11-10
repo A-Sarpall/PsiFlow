@@ -11,7 +11,7 @@ const Home = ({ onLogout }) => {
     e.preventDefault();
     try {
       const response = await axios.post(
-        "http://localhost:3000/create-checkout-session",
+        "/.netlify/functions/create-checkout-session",
         {
           eventType,
           price: parseInt(price),
