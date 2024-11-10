@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   BrowserRouter as Router,
   Route,
@@ -12,20 +12,27 @@ import Success from "./Success"; // Import the Success component
 
 const App = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [authToken, setAuthToken] = useState(null); // Corrected state
+  const [authToken, setAuthToken] = useState(null); // Track token if needed
+
+  useEffect(() => {
+    // Check localStorage for an existing authToken on component mount
+    const storedToken = localStorage.getItem("authToken");
+    if (storedToken) {
+      setAuthToken(storedToken); // If a token is found, set it in state
+      setIsAuthenticated(true); // Mark user as authenticated
+    }
+  }, []); // Run only once on component mount
 
   const handleLogin = (token) => {
-    setAuthToken(token);
-    setIsAuthenticated(true);
-    // Optional: Store token in localStorage if you want it to persist
-    localStorage.setItem("authToken", token);
+    setAuthToken(token); // Store token in state
+    setIsAuthenticated(true); // Mark user as authenticated
+    localStorage.setItem("authToken", token); // Store token in localStorage for persistence
   };
 
   const handleLogout = () => {
-    setAuthToken(null);
-    setIsAuthenticated(false);
-    // Clean up localStorage
-    localStorage.removeItem("authToken");
+    setAuthToken(null); // Clear the token from state
+    setIsAuthenticated(false); // Mark user as logged out
+    localStorage.removeItem("authToken"); // Remove token from localStorage
   };
 
   return (
@@ -53,7 +60,7 @@ const App = () => {
             path="/home"
             element={
               isAuthenticated ? (
-                <Home onLogout={handleLogout} />
+                <Home onLogout={handleLogout} authToken={authToken} />
               ) : (
                 <Navigate to="/login" replace />
               )
