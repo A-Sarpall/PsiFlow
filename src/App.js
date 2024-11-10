@@ -1,4 +1,3 @@
-// App.js
 import React, { useState } from "react";
 import {
   BrowserRouter as Router,
@@ -13,7 +12,7 @@ import Success from "./Success"; // Import the Success component
 
 const App = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [setAuthToken] = useState(null);
+  const [authToken, setAuthToken] = useState(null); // Corrected state
 
   const handleLogin = (token) => {
     setAuthToken(token);
