@@ -8,7 +8,6 @@ exports.handler = async (event, context) => {
   try {
     let session;
     if (eventType === "one_time") {
-      // One-time purchase
       session = await stripe.checkout.sessions.create({
         payment_method_types: ["card"],
         line_items: [
@@ -28,7 +27,6 @@ exports.handler = async (event, context) => {
         cancel_url: `${process.env.CLIENT_URL}/cancel`,
       });
     } else if (eventType === "recurring") {
-      // Recurring payment (price divided by installments)
       const monthlyPrice = Math.round((price / installments) * 100); // Divide by installments, convert to cents
 
       session = await stripe.checkout.sessions.create({
@@ -59,9 +57,10 @@ exports.handler = async (event, context) => {
       body: JSON.stringify({ url: session.url }),
     };
   } catch (error) {
+    console.error("Error details:", error); // Log full error details for more insight
     return {
       statusCode: 500,
-      body: JSON.stringify({ error: error.message }),
+      body: JSON.stringify({ error: error.message, details: error.stack }), // Include stack trace
     };
   }
 };
