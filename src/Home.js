@@ -10,7 +10,7 @@ const Home = ({ onLogout }) => {
   const handleCreateEvent = async (e) => {
     e.preventDefault();
     try {
-      const apiUrl = process.env.REACT_APP_API_URL;
+      const apiUrl = "http://localhost:3000"; // replace with the port your server is running on
       const response = await axios.post(`${apiUrl}/create-checkout-session`, {
         eventType,
         price: parseInt(price),
