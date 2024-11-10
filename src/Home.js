@@ -1,7 +1,6 @@
 // Home.js
 import React, { useState } from "react";
 import axios from "axios";
-import "./Home.css";
 
 const Home = ({ onLogout }) => {
   const [eventType, setEventType] = useState("one_time");
@@ -11,7 +10,7 @@ const Home = ({ onLogout }) => {
   const handleCreateEvent = async (e) => {
     e.preventDefault();
     try {
-      const apiUrl = "http://localhost:3000"; // replace with the port your server is running on
+      const apiUrl = "http://localhost:3000"; // Change this to the backend API URL
       const response = await axios.post(`${apiUrl}/create-checkout-session`, {
         eventType,
         price: parseInt(price),

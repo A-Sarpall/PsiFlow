@@ -5,35 +5,37 @@ import {
   Route,
   Routes,
   Navigate,
+  Link,
 } from "react-router-dom";
 import Register from "./Register";
 import Login from "./Login";
-import Home from "./Home";
-import Success from "./Success"; // Import Success component
+import Home from "./Home"; // Home is where your payment form exists
+import Success from "./Success";
+import Input from "./Input";
+import Dashboard from "./Dashboard";
 
 const App = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [authToken, setAuthToken] = useState(null); // Track token if needed
+  const [authToken, setAuthToken] = useState(null);
 
   useEffect(() => {
-    // Check localStorage for an existing authToken on component mount
     const storedToken = localStorage.getItem("authToken");
     if (storedToken) {
-      setAuthToken(storedToken); // If a token is found, set it in state
-      setIsAuthenticated(true); // Mark user as authenticated
+      setAuthToken(storedToken);
+      setIsAuthenticated(true);
     }
-  }, []); // Run only once on component mount
+  }, []);
 
   const handleLogin = (token) => {
-    setAuthToken(token); // Store token in state
-    setIsAuthenticated(true); // Mark user as authenticated
-    localStorage.setItem("authToken", token); // Store token in localStorage for persistence
+    setAuthToken(token);
+    setIsAuthenticated(true);
+    localStorage.setItem("authToken", token);
   };
 
   const handleLogout = () => {
-    setAuthToken(null); // Clear the token from state
-    setIsAuthenticated(false); // Mark user as logged out
-    localStorage.removeItem("authToken"); // Remove token from localStorage
+    setAuthToken(null);
+    setIsAuthenticated(false);
+    localStorage.removeItem("authToken");
   };
 
   return (
@@ -45,6 +47,19 @@ const App = () => {
           style={{ width: "200px", height: "200px" }}
           className="mx-auto mb-6"
         />
+
+        {/* Navigation bar with buttons */}
+        <div className="flex justify-center space-x-4">
+          <Link to="/input">
+            <button className="btn">Input</button>
+          </Link>
+          <Link to="/dashboard">
+            <button className="btn">Dashboard</button>
+          </Link>
+          <Link to="/home">
+            <button className="btn">Payment</button>
+          </Link>
+        </div>
 
         <Routes>
           <Route
@@ -73,14 +88,23 @@ const App = () => {
               )
             }
           />
-          <Route
-            path="/success"
-            element={<Success />} // Add this route for the success page
-          />
+          <Route path="/success" element={<Success />} />
           <Route
             path="/"
             element={
               <Navigate to={isAuthenticated ? "/home" : "/login"} replace />
+            }
+          />
+          <Route
+            path="/input"
+            element={
+              isAuthenticated ? <Input /> : <Navigate to="/login" replace />
+            }
+          />
+          <Route
+            path="/dashboard"
+            element={
+              isAuthenticated ? <Dashboard /> : <Navigate to="/login" replace />
             }
           />
         </Routes>
