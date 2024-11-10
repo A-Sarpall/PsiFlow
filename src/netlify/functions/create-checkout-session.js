@@ -1,7 +1,7 @@
 // netlify/functions/create-checkout-session.js
 require("dotenv").config();
 const Stripe = require("stripe");
-const stripe = Stripe(process.env.STRIPE_SECRET_KEY);
+const stripe = Stripe(process.env.STRIPE_API_KEY);
 
 exports.handler = async (event, context) => {
   const { eventType, price, installments } = JSON.parse(event.body);
