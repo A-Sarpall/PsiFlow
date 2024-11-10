@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Papa from 'papaparse';
+import * as XLSX from 'xlsx';
 
 const FileUpload = () => {
   const [data, setData] = useState([]);
@@ -7,18 +8,31 @@ const FileUpload = () => {
   const handleFileChange = (event) => {
     const file = event.target.files[0];
     if (file) {
-      Papa.parse(file, {
-        header: true,
-        complete: (results) => {
-          setData(results.data);
-        },
-      });
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        const binaryStr = e.target.result;
+        if (file.type === 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet') {
+          const workbook = XLSX.read(binaryStr, { type: 'binary' });
+          const sheetName = workbook.SheetNames[0];
+          const sheet = workbook.Sheets[sheetName];
+          const jsonData = XLSX.utils.sheet_to_json(sheet);
+          setData(jsonData);
+        } else {
+          Papa.parse(binaryStr, {
+            header: true,
+            complete: (results) => {
+              setData(results.data);
+            },
+          });
+        }
+      };
+      reader.readAsBinaryString(file);
     }
   };
 
   return (
     <div>
-      <input type="file" accept=".csv" onChange={handleFileChange} />
+      <input type="file" accept=".csv, .xlsx" onChange={handleFileChange} />
       <table>
         <thead>
           <tr>
