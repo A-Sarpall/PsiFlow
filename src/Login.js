@@ -13,25 +13,20 @@ const Login = ({ onLogin }) => {
     e.preventDefault();
 
     try {
-      // Attempt to sign in with Firebase Auth
-      await firebaseSignIn(auth, email, password)
-        .then((userCredential) => {
-          const user = userCredential.user; // Firebase user object
-          console.log("Logged in:", user);
-          const token = user.accessToken; // You can get the ID token if needed
-          onLogin(token); // Pass token to parent component or save it locally
-          navigate("/home");
-        })
-        .catch((error) => {
-          // Handle login errors
-          const errorCode = error.code;
-          const errorMessage = error.message;
-          setError("Invalid credentials. Please try again.");
-          console.error(errorCode, errorMessage);
-        });
-    } catch (err) {
+      const userCredential = await firebaseSignIn(auth, email, password);
+      const user = userCredential.user;
+
+      console.log("Logged in:", user);
+      const token = user.accessToken; // Token is here, it's not undefined
+
+      if (token) {
+        // Do something with the token, like storing or using it
+        onLogin(token);
+        navigate("/home");
+      }
+    } catch (error) {
       setError("An error occurred during login. Please try again later.");
-      console.error(err);
+      console.error(error);
     }
   };
 
