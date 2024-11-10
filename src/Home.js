@@ -1,6 +1,7 @@
 // Home.js
 import React, { useState } from "react";
 import axios from "axios";
+import "./Home.css";
 
 const Home = ({ onLogout }) => {
   const [eventType, setEventType] = useState("one_time");

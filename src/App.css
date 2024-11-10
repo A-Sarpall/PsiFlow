@@ -1,38 +1,124 @@
-.App {
+/* App.css */
+
+/* Basic reset */
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: #ffffff;
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+/* Center the content of the page using flexbox */
+.main-content {
+  display: flex;
+  justify-content: center; /* Center horizontally */
+  align-items: center; /* Center vertically */
+  height: 100vh; /* Full height of the viewport */
+  flex-direction: column; /* Stack content vertically */
+  padding: 20px;
+}
+
+/* Title styling */
+h1, h2, p{
+  color: #333;
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+h3 {
+  color: #555;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+/* General button styling */
+button {
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #00c063;
   color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
 }
 
-.App-link {
-  color: #61dafb;
+button:hover {
+  background-color: #45a049;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+/* Form container styling */
+form {
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  max-width: 400px;
+  width: 100%;
+  margin: 20px auto;
+  box-sizing: border-box; /* Ensure padding doesn't cause overflow */
+}
+
+/* Input and select field styling */
+form input,
+form select {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
+}
+
+/* Focus state for input and select fields */
+form input[type="number"]:focus,
+form select:focus {
+  border-color: #4caf50;
+  outline: none;
+}
+
+/* Spacing for form fields */
+form div {
+  margin-bottom: 15px;
+}
+
+/* Label styling */
+label {
+  font-weight: bold;
+}
+
+/* Submit button styling */
+form button {
+  width: 100%;
+  background-color: #00c063;
+  font-size: 18px;
+}
+
+form button:hover {
+  background-color: green;
+}
+
+/* Link text styling */
+.register-link {
+  font-size: 14px;
+  margin-top: 15px;
+}
+
+.register-link a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+.register-link a:hover {
+  text-decoration: underline;
+}
+
+/* Media query for smaller screens */
+@media (max-width: 600px) {
+  form {
+    max-width: 90%; /* Allow form to take up more space on smaller screens */
   }
-  to {
-    transform: rotate(360deg);
+
+  button {
+    font-size: 14px;
   }
 }

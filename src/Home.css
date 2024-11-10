@@ -1,0 +1,110 @@
+/* App.css or Home.css */
+
+/* Ensure the body takes up full height and has no margin */
+body, html {
+    height: 100%;
+    margin: 0;
+  }
+  
+  /* Use flexbox for centering content */
+  .main-content {
+    display: flex;
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    height: 100vh; /* Full height of the viewport */
+    flex-direction: column; /* Stack content vertically */
+    text-align: center; /* Center text */
+    padding: 20px;
+    background-color: #ffffff;
+  }
+  
+  /* Styling for the container holding the form */
+  .home-container {
+    background-color: white;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 500px; /* Limit max width of the form */
+    box-sizing: border-box; /* Ensure padding is included in the width */
+  }
+  
+  /* Center the title and other text */
+  .home-container h2,
+  .home-container p {
+    margin-bottom: 20px;
+  }
+  
+  .home-container h2 {
+    color: #333;
+  }
+  
+  .home-container p {
+    color: #666;
+  }
+  
+  /* Form styling */
+  form {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch; /* Make input fields fill the width of the container */
+    width: 100%; /* Ensure form uses full container width */
+  }
+  
+  /* Input fields styling */
+  form input[type="number"],
+  form select {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box; /* Ensures padding doesn't add extra width */
+  }
+  
+  /* Button styling */
+  form button {
+    width: 100%;
+    padding: 12px;
+    background-color: #00c063;
+    color: white;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    box-sizing: border-box; /* Ensure button fits the form width */
+  }
+  
+  form button:hover {
+    background-color: green;
+  }
+  
+  /* Style for the link text */
+  .home-container .register-link {
+    margin-top: 15px;
+    font-size: 14px;
+  }
+  
+  .home-container .register-link a {
+    color: #007bff;
+    text-decoration: none;
+  }
+  
+  .home-container .register-link a:hover {
+    text-decoration: underline;
+  }
+  
+  /* Add responsive design for smaller screens */
+  @media (max-width: 600px) {
+    .home-container {
+      width: 90%; /* Allow form to take more width on small screens */
+    }
+  
+    form input[type="number"],
+    form select,
+    form button {
+      font-size: 14px;
+    }
+  }
+  

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import "./App.css";
 import {
   BrowserRouter as Router,
   Route,
@@ -8,7 +9,7 @@ import {
 import Register from "./Register";
 import Login from "./Login";
 import Home from "./Home";
-import Success from "./Success"; // Import the Success component
+import Success from "./Success"; // Import Success component
 
 const App = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -37,8 +38,14 @@ const App = () => {
 
   return (
     <Router>
-      <div className="p-4">
-        <h1 className="text-2xl font-bold mb-4">PsiFlow</h1>
+      <div className="App">
+        <img
+          src="/psi.png"
+          alt="PsiFlow Logo"
+          style={{ width: "200px", height: "200px" }}
+          className="mx-auto mb-6"
+        />
+
         <Routes>
           <Route
             path="/register"
